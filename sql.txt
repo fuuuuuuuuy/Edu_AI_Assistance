@@ -1,0 +1,47 @@
+CREATE TABLE courses (
+    course_id INT AUTO_INCREMENT PRIMARY KEY,
+    course_name VARCHAR(100) NOT NULL,
+    course_description TEXT,
+    course_type VARCHAR(50) NOT NULL,
+    course_difficulty VARCHAR(20) NOT NULL,
+    course_platform VARCHAR(50) NOT NULL,
+    course_url VARCHAR(200) NOT NULL,
+    course_image_url VARCHAR(200),
+    course_price DECIMAL(10, 2),
+    course_is_free BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) COMMENT='课程信息表';
+
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_name VARCHAR(50) NOT NULL,
+    user_telep CHAR(11) comment '员工电话',
+    user_email CHAR(32) NOT NULL UNIQUE,
+    user_password VARCHAR(20) NOT NULL,
+    user_role VARCHAR(20) NOT NULL DEFAULT 'student',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) COMMENT='用户信息表';
+
+
+CREATE TABLE user_courses (
+    user_course_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    course_id INT NOT NULL,
+    enrollment_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    progress DECIMAL(5, 2) DEFAULT 0.00,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+) COMMENT='用户课程关联表';
+
+
+-- 为课程表添加索引
+CREATE INDEX idx_course_name ON courses (course_name);
+CREATE INDEX idx_course_platform ON courses (course_platform);
+
+-- 为用户表添加索引
+CREATE INDEX idx_user_email ON users (user_email);
+
+-- 为用户课程表添加索引
+CREATE INDEX idx_user_courses ON user_courses (user_id, course_id);
