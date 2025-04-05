@@ -1,3 +1,6 @@
 [submodule "ai-assisted-system-front-end"]
 	path = ai-assisted-system-front-end
 	url = https://gitee.com/fuuuuuuy/ai-assisted-system-front-end.git
+[submodule "frontend"]
+	path = frontend
+	url = https://gitee.com/fuuuuuuy/ai-assisted-system-front-end.git

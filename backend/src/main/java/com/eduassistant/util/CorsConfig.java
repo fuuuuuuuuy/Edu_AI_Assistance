@@ -14,7 +14,7 @@ public class CorsConfig implements WebMvcConfigurer {
 //                设置允许跨域请求的域名
                 .allowedOrigins("*")
 //                是否允许证书
-                .allowCredentials(true)
+                .allowCredentials(false)
                 .allowedMethods("GET", "POST", "DELETE", "PUT","OPTIONS")
                 .allowedHeaders("*")
 //                跨域允许时间
